@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="./assets/images/favicon-32x32.png"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Age calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <form>
+          <div class="input-field">
+            <label>DAY</label>
+            <input
+              type="text"
+              id="inputdate"
+              placeholder="DD"
+              class="input-two"
+              onfocus="clearOutputs()"
+            />
+          </div>
+          <div class="input-field">
+            <label>MONTH</label>
+            <input
+              type="text"
+              id="inputmonth"
+              placeholder="MM"
+              class="input-two"
+              onfocus="clearOutputs()"
+            />
+          </div>
+          <div class="input-field">
+            <label>YEAR</label>
+            <input
+              type="text"
+              id="inputyear"
+              placeholder="YYYY"
+              class="input-four"
+              onfocus="clearOutputs()"
+            />
+          </div>
+
+          <button type="button" onclick="runScript()">
+            <div class="icon-box">
+              <img
+                src="./assets/images/icon-arrow.svg"
+                alt="button"
+                class="button-img"
+              />
+            </div>
+          </button>
+        </form>
+      </div>
+
+      <div class="results">
+        <h1><span  id="outputYears" class="output-span">--</span> years</h1>
+        <h1><span  id="outputMonths" class="output-span">--</span> months</h1>
+        <h1><span  id="outputDays" class="output-span">--</span> days</h1>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  </body>
+</html>
