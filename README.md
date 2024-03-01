@@ -41,8 +41,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: Pending
-- Live Site URL: Pending
+- Solution URL:  [Github repository](https://github.com/memominguez/age-calculator)
+- Live Site URL:  [Github pages](https://memominguez.github.io/age-calculator/)
 
 ## My process
 
