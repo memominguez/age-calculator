@@ -4,19 +4,25 @@ const inputMonth = document.getElementById("inputmonth");
 const inputDate = document.getElementById("inputdate");
 
 // Output elements
-const outputYears = document.querySelector("#outputYears")
-const outputMonths = document.querySelector("#outputMonths")
-const outputDays = document.querySelector("#outputDays")
+const outputYears = document.querySelector("#outputYears");
+const outputMonths = document.querySelector("#outputMonths");
+const outputDays = document.querySelector("#outputDays");
 
-function runScript() { 
+function runScript() {
   let year = parseInt(inputYear.value);
   let month = parseInt(inputMonth.value);
   let date = parseInt(inputDate.value);
 
-  console.log("Birthday ", year, month, date);
-
   // Check if input values are numbers in the acceptable range
-  if (!checkInputs(year, month, date)) {
+  if (!checkDateInput(date)) {
+    return;
+  }
+
+  if (!checkMonthInput(month)) {
+    return;
+  }
+
+  if (!checkYearInput(year)) {
     return;
   }
 
@@ -31,6 +37,37 @@ function runScript() {
   calculateAge(year, month, date);
 }
 
+function checkDateInput(date) {
+  if (isNaN(date) || date < 1 || date > 31) {
+    alert(
+      "Day must be a number 1 to 31. Leading zeros acceptable: 01, 02, etc."
+    );
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function checkMonthInput(month) {
+  if (isNaN(month) || month < 1 || month > 12) {
+    alert(
+      "Month must be a number 1 to 12. Leading zeros acceptable: 01, 02, etc"
+    );
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function checkYearInput(year) {
+  if (isNaN(year) || year < 1800) {
+    alert("Year must be a number >= 1800, and not future year");
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function isValidPastDate(year, month, date) {
   // Create a Date object with the provided year, month, and date
   // Note: Month is zero-based in JavaScript Date objects (0 - January, 11 - December)
@@ -41,36 +78,9 @@ function isValidPastDate(year, month, date) {
 
   // The new Date() constructor might cheat us!!
   // Check if the date/month values is a valid combination
-  // The returned inputDate above must match the user input value  
+  // The returned inputDate above must match the user input value
   // Also check that the input must be a past date
   return inputDate.getDate() == date && inputDate < today;
-}
-
-function checkInputs(year, month, date) {
-  if (isNaN(date) || date < 1 || date > 31) {
-    alert(
-      "Day must be a number 1 to 31. Leading zeros acceptable: 01, 02, etc."
-    );
-    return false;
-  } else {
-    return true;
-  }
-
-  if (isNaN(month) || month < 1 || month > 12) {
-    alert(
-      "Month must be a number 1 to 12. Leading zeros acceptable: 01, 02, etc"
-    );
-    return false;
-  } else {
-    return true;
-  }
-
-  if (isNaN(year) || year < 1800) {
-    alert("Year must be a number >= 1800, and not future year");
-    return false;
-  } else {
-    return true;
-  }
 }
 
 function calculateAge(year, month, date) {
@@ -96,7 +106,7 @@ function calculateAge(year, month, date) {
   }
 
   if (d2 >= d1) {
-    d3 = d2 - d1;   
+    d3 = d2 - d1;
   } else {
     m3--;
     d3 = getDaysInMonth(y1, m1) + d2 - d1;
@@ -109,9 +119,14 @@ function calculateAge(year, month, date) {
   //console.log("elapsed time ", y3, m3, d3)
   outputYears.innerHTML = y3;
   outputMonths.innerHTML = m3;
-  outputDays.innerHTML = d3;  
+  outputDays.innerHTML = d3;
 
-  gsap.from(".output-span", {opacity: 0, duration: 3, ease: "power1.out", stagger: 0.5})
+  gsap.from(".output-span", {
+    opacity: 0,
+    duration: 3,
+    ease: "power1.out",
+    stagger: 0.5,
+  });
 }
 
 function getDaysInMonth(year, month) {
@@ -119,7 +134,7 @@ function getDaysInMonth(year, month) {
 }
 
 function clearOutputs() {
-  outputYears.innerHTML = "--";  
+  outputYears.innerHTML = "--";
   outputMonths.innerHTML = "--";
   outputDays.innerHTML = "--";
 }
