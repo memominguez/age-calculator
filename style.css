@@ -112,7 +112,7 @@ button {
   .container {
     width: 560px;
     height: 580px;
-    margin-top: 30px;   
+    /* margin-top: 30px;    */
   }
 
   .form-container {
@@ -137,7 +137,8 @@ button {
 @media screen and (max-width: 576px) {
   .container {
     height: 540px;
-    width: 350px;   
+    width: 350px; 
+    margin-top: -76px; 
   }
 
   .form-container {
