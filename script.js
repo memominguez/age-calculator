@@ -1,3 +1,12 @@
+// CONVENTION
+// Because years and months are not fixed size units for measuring time,
+// some results may move to discussion, in the case your birthday input happens
+// to be in the last or last 2 days of the month.
+// The result may look strange when the evaluation is run on a 31 days month.
+// More dramatic if you test the application on March, because the previous month
+// is shorter than your current month.
+// So the evaluation method is sort of a CONVENTION.
+
 // Input elements
 const inputYear = document.getElementById("inputyear");
 const inputMonth = document.getElementById("inputmonth");
@@ -8,6 +17,7 @@ const outputYears = document.querySelector("#outputYears");
 const outputMonths = document.querySelector("#outputMonths");
 const outputDays = document.querySelector("#outputDays");
 
+// ************* Main function **************
 function runScript() {
   let year = parseInt(inputYear.value);
   let month = parseInt(inputMonth.value);
@@ -84,6 +94,7 @@ function isValidPastDate(year, month, date) {
 }
 
 function calculateAge(year, month, date) {
+  // The input values
   let d1 = date;
   let m1 = month;
   let y1 = year;
@@ -94,8 +105,9 @@ function calculateAge(year, month, date) {
   let m2 = today.getMonth() + 1;
   let y2 = today.getFullYear();
 
-  let d3, m3, y3;
-
+  // The output values. Elapsed years, months, and days  
+  let y3, m3, d3; 
+  
   y3 = y2 - y1;
 
   if (m2 >= m1) {
@@ -108,15 +120,16 @@ function calculateAge(year, month, date) {
   if (d2 >= d1) {
     d3 = d2 - d1;
   } else {
-    m3--;
-    d3 = getDaysInMonth(y1, m1) + d2 - d1;
+    m3--;    
+    d3 = calcD3(y1, m1, d1, y2, m2, d2)    
   }
 
   if (m3 < 0) {
     m3 = 11;
     y3--;
   }
-  //console.log("elapsed time ", y3, m3, d3)
+
+  // Display and animate the outputs
   outputYears.innerHTML = y3;
   outputMonths.innerHTML = m3;
   outputDays.innerHTML = d3;
@@ -129,12 +142,24 @@ function calculateAge(year, month, date) {
   });
 }
 
-function getDaysInMonth(year, month) {
-  return new Date(year, month, 0).getDate();
-}
-
 function clearOutputs() {
   outputYears.innerHTML = "--";
   outputMonths.innerHTML = "--";
   outputDays.innerHTML = "--";
+}
+
+function calcD3(birthYear, birthMonth, birthDay, currYear, currMonth, currDay) {
+  //currMonth and birthMonth index comes in 1 to 12 basis
+ let elapsedDays
+ let prevMonthDays = new Date(currYear, (currMonth - 1), 0).getDate()
+
+ let birthMonthDays = new Date(birthYear, birthMonth, 0).getDate()  
+
+ // Solve the dilemma of the different month lengths. Leap month the worst.
+ if (birthMonthDays > prevMonthDays && birthDay >= prevMonthDays) {
+   elapsedDays = currDay
+ } else {
+   elapsedDays = prevMonthDays - birthDay + currDay
+ }
+ return elapsedDays  
 }
