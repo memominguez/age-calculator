@@ -112,7 +112,7 @@ button {
   .container {
     width: 560px;
     height: 580px;
-    margin-top: -90px;   
+    /* margin-top: -90px;    */
   }
 
   .form-container {
@@ -138,7 +138,7 @@ button {
   .container {
     height: 540px;
     width: 350px; 
-    margin-top: -140px; 
+    /* margin-top: -140px;  */
   }
 
   .form-container {
