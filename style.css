@@ -22,11 +22,15 @@ body {
   background: linear-gradient(135deg, #4203a9, #90bafc);
   /* background-color: var(--smokey-grey); */
   min-height: 100vh;
-  display: grid;
+  /* display: grid; */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .container {
-  place-self: center;
+  margin-top: 24px;
+  /* place-self: center; */
   background-color: var(--off-white);
   width: 680px;
   height: 530px;
